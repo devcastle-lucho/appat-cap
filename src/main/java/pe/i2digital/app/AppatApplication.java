@@ -25,7 +25,7 @@ public class AppatApplication implements CommandLineRunner
 
     @Override
     public void run(String... args) throws Exception {
-        //testCRUDCentroCostosService();
+        //Tests de console de repositorio y de servicio
     }
     private void testCRUDCentroCostosService() {
         //CRUD Simple - CrudRepository - Spring data
