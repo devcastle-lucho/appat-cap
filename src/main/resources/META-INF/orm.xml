@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entity-mappings version="2.0" xmlns="http://java.sun.com/xml/ns/persistence/orm"
+                 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                 xsi:schemaLocation="http://java.sun.com/xml/ns/persistence/orm
+        http://java.sun.com/xml/ns/persistence/orm_2_0.xsd ">
+
+    <named-query name="CentroCostos.findAllXML">
+        <query>select c from CentroCostos c order by c.codigo desc</query>
+    </named-query>
+    <named-query name="CentroCostos.buscarxCodigoXML">
+        <query>select c from CentroCostos c where c.codigo= ?1</query>
+    </named-query>
+
+    <named-native-query name="CentroCostos.findAllNativeXML"
+                        result-class="pe.i2digital.app.models.entity.CentroCostos">
+        <query>SELECT * FROM sh_empresa_20441636831.tb_at_centrocostos order by tb_centrocostos_cod DESC</query>
+    </named-native-query>
+
+</entity-mappings>
