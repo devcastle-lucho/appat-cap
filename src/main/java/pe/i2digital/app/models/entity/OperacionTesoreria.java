@@ -1,5 +1,6 @@
 package pe.i2digital.app.models.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -16,6 +17,7 @@ import javax.validation.constraints.Size;
 @AllArgsConstructor
 @Data
 public class OperacionTesoreria {
+    @JsonIgnore
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "tb_cuentacontable_id")
@@ -24,4 +26,8 @@ public class OperacionTesoreria {
     @NotNull(message = "Número es obligatorio")
     @Column(name = "tb_operaciontesoreria_nom")
     private String nombre;
+    @OneToOne // Relacion uno a uno
+    @JoinColumn(name = "tb_cuentacontable_id") //Con que atributo se vincula
+    @MapsId  //Mapeo de id compartido
+    private CuentaContable cuentaContable;
 }

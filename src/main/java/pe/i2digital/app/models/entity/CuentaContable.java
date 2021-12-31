@@ -1,5 +1,6 @@
 package pe.i2digital.app.models.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -33,4 +34,8 @@ public class CuentaContable {
     private String moneda;
     @Column(name = "tb_cuentacontable_usadoc")
     private Boolean usaDocumento;
+    @JsonIgnoreProperties(value = {"cuentaContable", "handler", "hibernateLazyInitializer"})
+    @OneToOne(mappedBy = "cuentaContable", cascade = CascadeType.ALL)
+    @PrimaryKeyJoinColumn
+    private OperacionTesoreria  operacionTesoreria;
 }
