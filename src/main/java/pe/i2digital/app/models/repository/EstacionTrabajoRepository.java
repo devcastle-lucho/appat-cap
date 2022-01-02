@@ -7,6 +7,6 @@ import pe.i2digital.app.models.entity.EstacionTrabajo;
 import java.util.Optional;
 
 public interface EstacionTrabajoRepository  extends CrudRepository<EstacionTrabajo, Integer> {
-    //Uso de DTO basado en interfaces o Proyeccios -> proyeccion cerrada
+    //Uso de DTO basado en interfaces o Proyecciones -> proyeccion cerrada /interfaces anidadas
     public Optional<EstacionTrabajoVista> findByCodigo(String codigo);
 }

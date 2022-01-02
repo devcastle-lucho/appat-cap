@@ -3,6 +3,7 @@ package pe.i2digital.app.models.repository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import pe.i2digital.app.models.dto.CuentaContableDTO;
+import pe.i2digital.app.models.dto.projection.CuentaContableCustom;
 import pe.i2digital.app.models.dto.projection.CuentaContableVista;
 import pe.i2digital.app.models.entity.CentroCostos;
 import pe.i2digital.app.models.entity.CuentaContable;
@@ -21,5 +22,11 @@ public interface CuentaContableRepository  extends CrudRepository<CuentaContable
     /*DTO basado en proyecciones / interfaces : Cerrado y Abierto*/
     //Uso de DTO basado en interfaces / proyeccion -> proyeccion cerrada
     public List<CuentaContableVista> findByNumeroStartingWithAndUsaDocumentoTrueOrderById(String numero);
-    //Uso de DTO basado en interfaces / proyeccion -> proyeccion cerrada / interfaces anidadas
+
+    //Uso de DTO basado en interfaces / proyeccion -> proyeccion abierta
+    //Usar JPQL
+    @Query("select c.id as id, c.numero as numero, c.usaDocumento as usaDocumento,c.nombre as cuentaContableNombre, o.nombre as operacionTesoreriaNombre " +
+            "from CuentaContable c INNER JOIN c.operacionTesoreria o " +
+            "where  UPPER(c.numero) like concat('',UPPER(?1),'%') order by c.numero")
+    public List<CuentaContableCustom> busquedaNumeroOperacionTesoreria(String numero);
 }

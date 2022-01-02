@@ -36,4 +36,9 @@ public class CuentaContableController {
         System.out.println("Filtro 2");
         return ResponseEntity.ok(service.findByNumeroStartingWithAndUsaDocumentoTrueOrderById(numero));
     }
+    @GetMapping("/filtro-numero/3/{numero}")
+    public ResponseEntity<?> busquedaNumeroOperacionTesoreria(@PathVariable String numero) {
+        System.out.println("Filtro 3");
+        return ResponseEntity.ok(service.busquedaNumeroOperacionTesoreria(numero));
+    }
 }
