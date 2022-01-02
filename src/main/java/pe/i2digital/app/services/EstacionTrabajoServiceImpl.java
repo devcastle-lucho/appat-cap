@@ -2,6 +2,7 @@ package pe.i2digital.app.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import pe.i2digital.app.models.dto.projection.EstacionTrabajoVista;
 import pe.i2digital.app.models.entity.EstacionTrabajo;
 import pe.i2digital.app.models.repository.EstacionTrabajoRepository;
 
@@ -20,5 +21,10 @@ public class EstacionTrabajoServiceImpl implements EstacionTrabajoService{
     @Override
     public EstacionTrabajo findById(Integer id) {
         return repository.findById(id).orElseGet(null);
+    }
+
+    @Override
+    public EstacionTrabajoVista findByCodigo(String codigo) {
+        return repository.findByCodigo(codigo).orElseGet(null);
     }
 }

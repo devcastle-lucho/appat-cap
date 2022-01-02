@@ -24,6 +24,16 @@ public class CuentaContableController {
     }
     @GetMapping("/numero/{numero}")
     public ResponseEntity<?> devolverPorNumero(@PathVariable String numero) {
-        return ResponseEntity.ok(service.findByNumeroOrderByIdIdAsc(numero));
+        return ResponseEntity.ok(service.findByNumeroStartingWithOrderByIdAsc(numero));
+    }
+    @GetMapping("/filtro-numero/1/{numero}")
+    public ResponseEntity<?> busquedaPersonalizadaNumero(@PathVariable String numero) {
+        System.out.println("Filtro 1");
+        return ResponseEntity.ok(service.busquedaPersonalizadaNumero(numero));
+    }
+    @GetMapping("/filtro-numero/2/{numero}")
+    public ResponseEntity<?> busquedaPersonalista(@PathVariable String numero) {
+        System.out.println("Filtro 2");
+        return ResponseEntity.ok(service.findByNumeroStartingWithAndUsaDocumentoTrueOrderById(numero));
     }
 }

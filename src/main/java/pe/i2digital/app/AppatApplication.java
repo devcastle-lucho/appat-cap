@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import pe.i2digital.app.models.dto.CuentaContableDTO;
 import pe.i2digital.app.models.entity.CentroCostos;
 import pe.i2digital.app.models.repository.CentroCostosRepository;
 import pe.i2digital.app.services.CentroCostosService;
@@ -25,6 +26,7 @@ public class AppatApplication implements CommandLineRunner
 
     @Override
     public void run(String... args) throws Exception {
+        //var o = new CuentaContableDTO();
         //Tests de console de repositorio y de servicio
     }
     private void testCRUDCentroCostosService() {

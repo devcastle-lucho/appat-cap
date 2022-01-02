@@ -3,6 +3,7 @@ package pe.i2digital.app.services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pe.i2digital.app.models.dto.CuentaContableDTO;
+import pe.i2digital.app.models.dto.projection.CuentaContableVista;
 import pe.i2digital.app.models.entity.CuentaContable;
 import pe.i2digital.app.models.repository.CuentaContableRepository;
 
@@ -24,8 +25,17 @@ public class CuentaContableServiceImpl implements  CuentaContableService{
     }
 
     @Override
-    public List<CuentaContableDTO> findByNumeroOrderByIdIdAsc(String numero) {
-        //return repository.findByNumeroOrderByIdIdAsc(numero);
-        return null;
+    public List<CuentaContableDTO> findByNumeroStartingWithOrderByIdAsc(String numero) {
+        return repository.findByNumeroStartingWithOrderByIdAsc(numero);
+    }
+
+    @Override
+    public List<CuentaContableDTO> busquedaPersonalizadaNumero(String numero) {
+        return repository.busquedaPersonalizadaNumero(numero);
+    }
+
+    @Override
+    public List<CuentaContableVista> findByNumeroStartingWithAndUsaDocumentoTrueOrderById(String numero) {
+        return repository.findByNumeroStartingWithAndUsaDocumentoTrueOrderById(numero);
     }
 }

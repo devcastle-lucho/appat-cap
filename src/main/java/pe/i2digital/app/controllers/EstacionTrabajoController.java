@@ -22,4 +22,8 @@ public class EstacionTrabajoController {
     public ResponseEntity<?> devolver(@PathVariable Integer id) {
         return ResponseEntity.ok(service.findById(id));
     }
+    @GetMapping("/filtro-codigo/{codigo}")
+    public ResponseEntity<?> devolver(@PathVariable String codigo) {
+        return ResponseEntity.ok(service.findByCodigo(codigo));
+    }
 }
