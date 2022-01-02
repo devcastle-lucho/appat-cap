@@ -22,4 +22,8 @@ public class CuentaContableController {
     public ResponseEntity<?> devolver(@PathVariable Integer id) {
         return ResponseEntity.ok(service.findById(id));
     }
+    @GetMapping("/numero/{numero}")
+    public ResponseEntity<?> devolverPorNumero(@PathVariable String numero) {
+        return ResponseEntity.ok(service.findByNumeroOrderByIdIdAsc(numero));
+    }
 }
