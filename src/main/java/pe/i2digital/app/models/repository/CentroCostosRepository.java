@@ -11,6 +11,7 @@ import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.jpa.repository.query.Procedure;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
@@ -73,4 +74,10 @@ public interface CentroCostosRepository extends CrudRepository<CentroCostos, Int
     //3-x SQL Nativo: listar
     @Query(nativeQuery = true)
     public List<CentroCostos> findAllNative();
+
+    ///// Consultas avanzadas: funciones "que devuelve informacion"
+    @Query( value = "select version()",nativeQuery = true)
+    public String getVersion();
+    @Procedure("version")
+    public String getVersionProcedure();
 }

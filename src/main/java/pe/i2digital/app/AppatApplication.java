@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import pe.i2digital.app.models.dao.GenericDAO;
 import pe.i2digital.app.models.dto.CuentaContableDTO;
 import pe.i2digital.app.models.entity.CentroCostos;
 import pe.i2digital.app.models.repository.CentroCostosRepository;
@@ -18,6 +19,8 @@ public class AppatApplication implements CommandLineRunner
     @Autowired
     private CentroCostosRepository repository;
     @Autowired
+    private GenericDAO genericDAO;
+    @Autowired
     private CentroCostosService service;
 
     public static void main(String[] args) {
@@ -26,9 +29,25 @@ public class AppatApplication implements CommandLineRunner
 
     @Override
     public void run(String... args) throws Exception {
-        //var o = new CuentaContableDTO();
-        //Tests de console de repositorio y de servicio
+        testVersion();
     }
+    private void testVersion() {
+        // Test con org.springframework.data.jpa.repository.Query: Query nativa
+        String version = repository.getVersion();
+        System.out.println("Version 'Forma 1': "+version);
+        // Test con org.springframework.data.jpa.repository.Query: @Procedure
+        String version2 = repository.getVersionProcedure();
+        System.out.println("Version 'Forma 2': "+version2);
+        // Test con org.springframework.jdbc.core
+        String version3 = genericDAO.getVersion();
+        System.out.println("Version 'Forma 3': "+version3);
+        String fechaActual = genericDAO.getFechaActual();
+        System.out.println("Fecha Actual 'Forma 3': "+fechaActual);
+        // Test con org.hibernate
+        String version4 = genericDAO.version();
+        System.out.println("Version 'Forma 4': "+version4);
+    }
+
     private void testCRUDCentroCostosService() {
         //CRUD Simple - CrudRepository - Spring data
         //READ
