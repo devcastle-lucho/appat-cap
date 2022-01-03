@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import pe.i2digital.app.models.dao.AsientoContableDAO;
+import pe.i2digital.app.models.dao.DetalleAsientoContableDAO;
 import pe.i2digital.app.models.dao.GenericDAO;
 import pe.i2digital.app.models.dto.CuentaContableDTO;
 import pe.i2digital.app.models.entity.CentroCostos;
@@ -22,14 +24,38 @@ public class AppatApplication implements CommandLineRunner
     private GenericDAO genericDAO;
     @Autowired
     private CentroCostosService service;
-
+    @Autowired
+    private AsientoContableDAO asientoContableDAO;
+    @Autowired
+    private DetalleAsientoContableDAO detalleAsientoContableDAO;
     public static void main(String[] args) {
             SpringApplication.run(AppatApplication.class, args);
     }
 
     @Override
     public void run(String... args) throws Exception {
-        testVersion();
+        testSeguimientoDocumentos();
+    }
+    private void testSeguimientoDocumentos() {
+        /*var lista = detalleAsientoContableDAO.seguimientoDocumentos("sh_empresa_20441636831","2020",38);
+        for (var e:  lista ) {
+            System.out.println(" DA Proposito: "+ e.getProposito()+" - "+ "DA Codigo: "+e.getTipo()+" - DA IMPSoles"+e.getImporteSoles() +
+                              " - AC ID: "+e.getOAsientoContable().getId()+" - AC glosa: "+e.getOAsientoContable().getGlosa()+" - TOC Codigo: "+e.getOAsientoContable().getOTipoOperacionContable().getCodigo()+
+                                " - D Moneda:"+e.getODocumento().getMoneda());
+        }
+        */
+        var lista = detalleAsientoContableDAO.seguimientoDocumentos2("sh_empresa_20441636831","2020",38);
+        for (var e:  lista ) {
+            System.out.println(" DA Proposito: "+ e.getProposito()+" - "+ "DA Codigo: "+e.getTipo()+" - DA IMPSoles"+e.getImporteSoles() +
+                    " - AC ID: "+e.getOAsientoContable().getId()+" - AC glosa: "+e.getOAsientoContable().getGlosa()+" - TOC Codigo: "+e.getOAsientoContable().getOTipoOperacionContable().getCodigo()+
+                    " - D Moneda:"+e.getODocumento().getMoneda());
+        }
+    }
+    private void testAsientoContable(){
+        var lista = asientoContableDAO.busquedaExcel("2020",38);
+        for (var e :  lista) {
+            System.out.println(e.getGlosa()+" - "+ e.getNumero() +" - " +e.getCuentaContable() +" - " + e.getDebeSoles());
+        }
     }
     private void testVersion() {
         // Test con org.springframework.data.jpa.repository.Query: Query nativa
