@@ -13,7 +13,9 @@ import pe.i2digital.app.models.dao.GenericDAO;
 import pe.i2digital.app.models.dto.CuentaContableDTO;
 import pe.i2digital.app.models.entity.CentroCostos;
 import pe.i2digital.app.models.repository.CentroCostosRepository;
+import pe.i2digital.app.models.repository.CuentaContableRepository;
 import pe.i2digital.app.services.CentroCostosService;
+import pe.i2digital.app.services.EstacionTrabajoService;
 
 @SpringBootApplication
 public class AppatApplication implements CommandLineRunner
@@ -28,13 +30,29 @@ public class AppatApplication implements CommandLineRunner
     private AsientoContableDAO asientoContableDAO;
     @Autowired
     private DetalleAsientoContableDAO detalleAsientoContableDAO;
+    @Autowired
+    private CuentaContableRepository repositoryCuentaContable;
+    @Autowired
+    private EstacionTrabajoService estacionTrabajoService;
     public static void main(String[] args) {
             SpringApplication.run(AppatApplication.class, args);
     }
 
     @Override
     public void run(String... args) throws Exception {
-        testSeguimientoDocumentos();
+        testListaArtificio();
+    }
+    private void testListaArtificio(){
+       var lista= estacionTrabajoService.busquedaPersonalizada();
+        for (var item : lista) {
+            System.out.println(item.getId() +" - "+item.getCodigo() +" - "+item.getNombre());
+        }
+    }
+    private void testListarSinTipificar() {
+        var lista=  repositoryCuentaContable.cuentaDiferenciaCambioDocumentos();
+        for (var item : lista) {
+            System.out.println(item[0] +" - "+item[1] +" - "+item[2]);
+        }
     }
     private void testSeguimientoDocumentos() {
         /*var lista = detalleAsientoContableDAO.seguimientoDocumentos("sh_empresa_20441636831","2020",38);
@@ -73,7 +91,6 @@ public class AppatApplication implements CommandLineRunner
         String version4 = genericDAO.version();
         System.out.println("Version 'Forma 4': "+version4);
     }
-
     private void testCRUDCentroCostosService() {
         //CRUD Simple - CrudRepository - Spring data
         //READ

@@ -29,4 +29,7 @@ public interface CuentaContableRepository  extends CrudRepository<CuentaContable
             "from CuentaContable c INNER JOIN c.operacionTesoreria o " +
             "where  UPPER(c.numero) like concat('',UPPER(?1),'%') order by c.numero")
     public List<CuentaContableCustom> busquedaNumeroOperacionTesoreria(String numero);
+
+    @Query(value = "select * from sh_empresa_20441636831.fn_at_select_cuenta_diferenciacambio_documentos()", nativeQuery = true)
+    public List<Object[]> cuentaDiferenciaCambioDocumentos();
 }
