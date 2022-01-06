@@ -8,6 +8,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import pe.i2digital.app.models.dao.AsientoContableDAO;
+import pe.i2digital.app.models.dao.CentroCostosDAO;
 import pe.i2digital.app.models.dao.DetalleAsientoContableDAO;
 import pe.i2digital.app.models.dao.GenericDAO;
 import pe.i2digital.app.models.dto.CuentaContableDTO;
@@ -34,13 +35,47 @@ public class AppatApplication implements CommandLineRunner
     private CuentaContableRepository repositoryCuentaContable;
     @Autowired
     private EstacionTrabajoService estacionTrabajoService;
+    @Autowired
+    private CentroCostosDAO centroCostosDAO;
+
     public static void main(String[] args) {
             SpringApplication.run(AppatApplication.class, args);
     }
 
     @Override
     public void run(String... args) throws Exception {
-        testListaArtificio();
+        testIudDAO();
+    }
+    private void testIudDAO() throws Exception {
+        String respuesta= null;
+        //respuesta = centroCostosDAO.iudJson(new CentroCostos(null,"06","PRUEBA"),"I","sh_empresa_20441636831");
+        //respuesta = centroCostosDAO.iudJson(new CentroCostos(25,"06","CC Test"),"U","sh_empresa_20441636831");
+        respuesta = centroCostosDAO.iudJson(new CentroCostos(25,null,null),"D","sh_empresa_20441636831");
+        List<CentroCostos> lista= (List<CentroCostos>) repository.findAll();
+        for (CentroCostos c : lista)
+            System.out.println(c.getId() + " - "+ c.getCodigo()+" - "+ c.getNombre()+" - ");
+    }
+
+    private void testIudFuncion(){
+        String respuesta= null;
+        //respuesta=repository.generateIUDRow("I",null,"06","TEST");
+        respuesta=repository.generateIUDRow("U",24,"06","PRUEBA");
+        System.out.println(respuesta);
+
+        List<CentroCostos> lista= (List<CentroCostos>) repository.findAll();
+        for (CentroCostos c : lista)
+            System.out.println(c.getId() + " - "+ c.getCodigo()+" - "+ c.getNombre()+" - ");
+    }
+    private void testIudFuncionProcedure(){
+        String respuesta= null;
+        //respuesta=repository.generateIUDRowProcedure("I",null,"06","TEST");
+        //respuesta=repository.generateIUDRowProcedure("U",23,"06","PRUEBA");
+        //respuesta=repository.generateIUDRowProcedure("D",23,null,null);
+        System.out.println(respuesta);
+
+        List<CentroCostos> lista= (List<CentroCostos>) repository.findAll();
+        for (CentroCostos c : lista)
+            System.out.println(c.getId() + " - "+ c.getCodigo()+" - "+ c.getNombre()+" - ");
     }
     private void testListaArtificio(){
        var lista= estacionTrabajoService.busquedaPersonalizada();

@@ -15,6 +15,7 @@ import org.springframework.data.jpa.repository.query.Procedure;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 import pe.i2digital.app.models.entity.CentroCostos;
 
 public interface CentroCostosRepository extends CrudRepository<CentroCostos, Integer> {
@@ -80,4 +81,19 @@ public interface CentroCostosRepository extends CrudRepository<CentroCostos, Int
     public String getVersion();
     @Procedure("version")
     public String getVersionProcedure();
+
+    @Procedure("sh_empresa_20441636831.fn_at_json_iud_row_centrocostos")
+    public String generateIUDRowProcedure(
+           @Param("accion") String accion,
+           @Param("centrocostos_id") Integer id,
+           @Param("centrocostos_cod") String codigo,
+           @Param("centrocostos_nom") String nombre
+    );
+    @Query( value = "select sh_empresa_20441636831.fn_at_json_iud_row_centrocostos(:accion,:centrocostos_id,:centrocostos_cod,:centrocostos_nom)",nativeQuery = true)
+    public String generateIUDRow(
+            @Param("accion") String accion,
+            @Param("centrocostos_id") Integer id,
+            @Param("centrocostos_cod") String codigo,
+            @Param("centrocostos_nom") String nombre
+    );
 }
