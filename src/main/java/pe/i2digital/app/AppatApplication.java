@@ -44,7 +44,7 @@ public class AppatApplication implements CommandLineRunner
 
     @Override
     public void run(String... args) throws Exception {
-        testIudDAO();
+        //testIudDAO();
     }
     private void testIudDAO() throws Exception {
         String respuesta= null;
