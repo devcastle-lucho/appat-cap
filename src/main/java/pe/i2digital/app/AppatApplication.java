@@ -7,14 +7,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import pe.i2digital.app.models.dao.AsientoContableDAO;
-import pe.i2digital.app.models.dao.CentroCostosDAO;
-import pe.i2digital.app.models.dao.DetalleAsientoContableDAO;
-import pe.i2digital.app.models.dao.GenericDAO;
+import pe.i2digital.app.models.dao.*;
 import pe.i2digital.app.models.dto.CuentaContableDTO;
 import pe.i2digital.app.models.entity.CentroCostos;
+import pe.i2digital.app.models.entity.CuentaContable;
 import pe.i2digital.app.models.repository.CentroCostosRepository;
 import pe.i2digital.app.models.repository.CuentaContableRepository;
+import pe.i2digital.app.models.udt.DestinoCompraUDT;
 import pe.i2digital.app.services.CentroCostosService;
 import pe.i2digital.app.services.EstacionTrabajoService;
 
@@ -37,6 +36,8 @@ public class AppatApplication implements CommandLineRunner
     private EstacionTrabajoService estacionTrabajoService;
     @Autowired
     private CentroCostosDAO centroCostosDAO;
+    @Autowired
+    private CuentaContableDAO cuentaContableDAO;
 
     public static void main(String[] args) {
             SpringApplication.run(AppatApplication.class, args);
@@ -44,7 +45,55 @@ public class AppatApplication implements CommandLineRunner
 
     @Override
     public void run(String... args) throws Exception {
-        testSeguimientoDocumentos();
+        testUDTArray();
+    }
+    private void testUDTArray() throws Exception {
+        String respuesta = null;
+        ///----Probar iudJsonV2 sin udt : 1° Forma de transaccion en DAO
+        /*
+        var cuentaContable1 = new CuentaContable();
+        cuentaContable1.setNumero("6034");
+        cuentaContable1.setNombre("COMBUSTIBLE");
+
+        respuesta= cuentaContableDAO.iudJsonV2("sh_empresa_20441636831","I",cuentaContable1,null,null);
+        */
+        //----Probar iudJson sin udt : 2° Forma de transaccion en DAO
+        /*var cuentaContable2 = new CuentaContable();
+        cuentaContable2.setNumero("60341");
+        cuentaContable2.setNombre("COMBUSTIBLE");
+
+        respuesta= cuentaContableDAO.iudJson("sh_empresa_20441636831","I",cuentaContable2,null,null);
+        */
+        //----Probar iudJsonV2 con udt : 1° Forma de transaccion en DAO
+        /*var cuentaContable3 = new CuentaContable();
+        cuentaContable3.setNumero("603411");
+        cuentaContable3.setNombre("COMBUSTIBLE");
+        cuentaContable3.setMoneda("A");
+
+        DestinoCompraUDT[] aDestinoCompra = new DestinoCompraUDT[] {
+                new DestinoCompraUDT("D",100.0,null,423),
+                new DestinoCompraUDT("H",100.0,null,2138)
+        };
+       respuesta= cuentaContableDAO.iudJsonV2("sh_empresa_20441636831","I",cuentaContable3,true,aDestinoCompra);
+       */
+        //----Probar iudJson con udt : 2° Forma de transaccion en DAO
+        /*var cuentaContable3 = new CuentaContable();
+        cuentaContable3.setId(3383);
+        cuentaContable3.setNumero("603411");
+        cuentaContable3.setNombre("COMBUSTIBLE - ACTUALIZADO");
+        cuentaContable3.setMoneda("A");
+
+        DestinoCompraUDT[] aDestinoCompra = new DestinoCompraUDT[] {
+                new DestinoCompraUDT("D",50.0,3383,423),
+                new DestinoCompraUDT("H",70.0,3383,2138)
+        };
+        respuesta= cuentaContableDAO.iudJson("sh_empresa_20441636831","U",cuentaContable3,false,aDestinoCompra);
+        */
+        //respuesta= cuentaContableDAO.iudJson("sh_empresa_20441636831","D",CuentaContable.builder().id(3383).numero("603411").build(),null,null);
+        respuesta= cuentaContableDAO.iudJsonV2("sh_empresa_20441636831","D",CuentaContable.builder().id(3382).numero("60341").build(),null,null);
+        System.out.println(respuesta);
+        respuesta= cuentaContableDAO.iudJsonV2("sh_empresa_20441636831","D",CuentaContable.builder().id(3381).numero("6034").build(),null,null);
+        System.out.println(respuesta);
     }
     private void testIudDAO() throws Exception {
         String respuesta= null;

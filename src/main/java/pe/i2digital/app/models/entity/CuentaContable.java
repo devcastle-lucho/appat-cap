@@ -38,4 +38,6 @@ public class CuentaContable {
     @OneToOne(mappedBy = "cuentaContable", cascade = CascadeType.ALL)
     @PrimaryKeyJoinColumn
     private OperacionTesoreria  operacionTesoreria;
+    /*@Transient //Para que no lo mapee el ORM
+    private Boolean updateonlydestino;*/
 }
