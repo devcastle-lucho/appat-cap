@@ -2,11 +2,13 @@ package pe.i2digital.app.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import pe.i2digital.app.models.dao.CuentaContableDAO;
 import pe.i2digital.app.models.dto.CuentaContableDTO;
 import pe.i2digital.app.models.dto.projection.CuentaContableCustom;
 import pe.i2digital.app.models.dto.projection.CuentaContableVista;
 import pe.i2digital.app.models.entity.CuentaContable;
 import pe.i2digital.app.models.repository.CuentaContableRepository;
+import pe.i2digital.app.models.request.CuentaContableRequest;
 
 import java.util.List;
 
@@ -14,6 +16,8 @@ import java.util.List;
 public class CuentaContableServiceImpl implements  CuentaContableService{
     @Autowired
     private CuentaContableRepository repository;
+    @Autowired
+    private CuentaContableDAO cuentaContableDAO;
 
     @Override
     public List<CuentaContable> findAll() {
@@ -43,5 +47,11 @@ public class CuentaContableServiceImpl implements  CuentaContableService{
     @Override
     public List<CuentaContableCustom> busquedaNumeroOperacionTesoreria(String numero) {
         return repository.busquedaNumeroOperacionTesoreria(numero);
+    }
+
+    @Override
+    public String iudJson(String ruc, String accion, CuentaContableRequest objeto) throws Exception {
+        String schema = String.format("sh_empresa_%s", ruc);
+        return cuentaContableDAO.iudJsonV2(schema,accion,objeto.getOCuentaContable(),objeto.getUpdateD(),objeto.getADestinoCompra());
     }
 }

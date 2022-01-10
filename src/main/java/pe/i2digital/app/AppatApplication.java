@@ -90,10 +90,10 @@ public class AppatApplication implements CommandLineRunner
         respuesta= cuentaContableDAO.iudJson("sh_empresa_20441636831","U",cuentaContable3,false,aDestinoCompra);
         */
         //respuesta= cuentaContableDAO.iudJson("sh_empresa_20441636831","D",CuentaContable.builder().id(3383).numero("603411").build(),null,null);
-        respuesta= cuentaContableDAO.iudJsonV2("sh_empresa_20441636831","D",CuentaContable.builder().id(3382).numero("60341").build(),null,null);
+        /*respuesta= cuentaContableDAO.iudJsonV2("sh_empresa_20441636831","D",CuentaContable.builder().id(3382).numero("60341").build(),null,null);
         System.out.println(respuesta);
         respuesta= cuentaContableDAO.iudJsonV2("sh_empresa_20441636831","D",CuentaContable.builder().id(3381).numero("6034").build(),null,null);
-        System.out.println(respuesta);
+        System.out.println(respuesta);*/
     }
     private void testIudDAO() throws Exception {
         String respuesta= null;

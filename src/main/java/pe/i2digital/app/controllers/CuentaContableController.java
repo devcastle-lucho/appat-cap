@@ -2,11 +2,9 @@ package pe.i2digital.app.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import pe.i2digital.app.models.entity.CuentaContable;
+import pe.i2digital.app.models.request.CuentaContableRequest;
 import pe.i2digital.app.services.CuentaContableService;
 
 @RequestMapping("/cuentacontable")
@@ -40,5 +38,9 @@ public class CuentaContableController {
     public ResponseEntity<?> busquedaNumeroOperacionTesoreria(@PathVariable String numero) {
         System.out.println("Filtro 3");
         return ResponseEntity.ok(service.busquedaNumeroOperacionTesoreria(numero));
+    }
+    @PutMapping("/{ruc}/iud/{accion}")
+    public ResponseEntity<?> iudJson(@PathVariable String ruc, @PathVariable String accion,@RequestBody CuentaContableRequest request) throws Exception {
+        return ResponseEntity.ok(service.iudJson(ruc,accion,request));
     }
 }
