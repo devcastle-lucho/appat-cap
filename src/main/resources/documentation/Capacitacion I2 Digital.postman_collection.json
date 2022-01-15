@@ -1,0 +1,376 @@
+{
+	"info": {
+		"_postman_id": "80376751-6efe-41d3-a3ca-3218f9c64706",
+		"name": "Capacitacion I2 Digital",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Colegio Ingenieros",
+			"item": [
+				{
+					"name": "Centro costos: Listar",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/centrocostos/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"centrocostos",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Centros costos: Devolver",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/centrocostos/3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"centrocostos",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Cuenta contable: Listar / DTO - Basado en expresion constructor",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8085/api/v1/cuentacontable/filtro-numero/1/10",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8085",
+							"path": [
+								"api",
+								"v1",
+								"cuentacontable",
+								"filtro-numero",
+								"1",
+								"10"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Centro costos: Crear",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "    {\r\n        \"codigo\": \"06\",\r\n        \"nombre\": \"PRUEBA CC\"\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/centrocostos/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"centrocostos",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Centro costos: Editar",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "    {\r\n        \"id\": 16,\r\n        \"codigo\": \"06\",\r\n        \"nombre\": \"CC Modificado\"\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/centrocostos/16",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"centrocostos",
+								"16"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Centro costos: Eliminar",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/centrocostos/16",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"centrocostos",
+								"16"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Cuenta contable : Listar",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8085/api/v1/cuentacontable/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8085",
+							"path": [
+								"api",
+								"v1",
+								"cuentacontable",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Cuenta contable: Listar / DTO - Basado en proyeccion / interface -> proyeccion cerrada",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8085/api/v1/cuentacontable/filtro-numero/2/10",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8085",
+							"path": [
+								"api",
+								"v1",
+								"cuentacontable",
+								"filtro-numero",
+								"2",
+								"10"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Operacion Tesoreria : Listar",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8085/api/v1/operaciontesoreria/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8085",
+							"path": [
+								"api",
+								"v1",
+								"operaciontesoreria",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Sucursal: Listar",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/sucursal/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"sucursal",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Estacion trabajo: Listar",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/estaciontrabajo/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"estaciontrabajo",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:8080/est/",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": null
+					},
+					"response": []
+				},
+				{
+					"name": "Cuenta contable: Listar / DTO - Basado en clase",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8085/api/v1/cuentacontable/numero/10",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8085",
+							"path": [
+								"api",
+								"v1",
+								"cuentacontable",
+								"numero",
+								"10"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Estacion trabajo: Buscar por codigo - DTO basado en proyeccion cerrada / interfaces anidadas",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8085/api/v1/estaciontrabajo/filtro-codigo/03",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8085",
+							"path": [
+								"api",
+								"v1",
+								"estaciontrabajo",
+								"filtro-codigo",
+								"03"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Cuenta contabla: Buscar por numero - DTO basado en proyeccion - proyeccion abierta",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8085/api/v1/cuentacontable/filtro-numero/3/10",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8085",
+							"path": [
+								"api",
+								"v1",
+								"cuentacontable",
+								"filtro-numero",
+								"3",
+								"10"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Cuenta contable: [IUD] Registrar sin udt",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"oCuentaContable\": {\r\n        \"numero\":\"60341\",\r\n        \"nombre\":\"COMBUSTIBLE\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8085/api/v1/cuentacontable/20441636831/iud/I",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8085",
+							"path": [
+								"api",
+								"v1",
+								"cuentacontable",
+								"20441636831",
+								"iud",
+								"I"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

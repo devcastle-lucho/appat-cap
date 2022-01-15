@@ -15,7 +15,7 @@ public class DestinoCompraUDT implements SQLData {
     private Double porcentaje;
     private Integer origen_id;
     private Integer destino_id;
-    public static final String TYPE_NAME ="sh_empresa_20441636831.tp_at_destinocompra";
+    public static final String TYPE_NAME ="%s.tp_at_destinocompra";
     @Override
     public String getSQLTypeName() throws SQLException {
         return TYPE_NAME;

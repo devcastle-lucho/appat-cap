@@ -11,6 +11,8 @@ import pe.i2digital.app.models.repository.CuentaContableRepository;
 import pe.i2digital.app.models.request.CuentaContableRequest;
 
 import java.util.List;
+import pe.i2digital.app.utils.Constants;
+import static pe.i2digital.app.utils.Constants.DB_SCHEMA;
 
 @Service
 public class CuentaContableServiceImpl implements  CuentaContableService{
@@ -51,7 +53,7 @@ public class CuentaContableServiceImpl implements  CuentaContableService{
 
     @Override
     public String iudJson(String ruc, String accion, CuentaContableRequest objeto) throws Exception {
-        String schema = String.format("sh_empresa_%s", ruc);
+        String schema = String.format(DB_SCHEMA, ruc);
         return cuentaContableDAO.iudJsonV2(schema,accion,objeto.getOCuentaContable(),objeto.getUpdateD(),objeto.getADestinoCompra());
     }
 }

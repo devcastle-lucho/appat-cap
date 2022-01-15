@@ -1,5 +1,6 @@
 package pe.i2digital.app.controllers;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -41,6 +42,8 @@ public class CuentaContableController {
     }
     @PutMapping("/{ruc}/iud/{accion}")
     public ResponseEntity<?> iudJson(@PathVariable String ruc, @PathVariable String accion,@RequestBody CuentaContableRequest request) throws Exception {
+        //System.out.println(request.getOCuentaContable());
+        System.out.println("objeto: "+ new ObjectMapper().writeValueAsString(request.getOCuentaContable()));
         return ResponseEntity.ok(service.iudJson(ruc,accion,request));
     }
 }

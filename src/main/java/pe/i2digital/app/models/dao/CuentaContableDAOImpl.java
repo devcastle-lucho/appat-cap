@@ -42,7 +42,7 @@ public class CuentaContableDAOImpl implements CuentaContableDAO{
                     ps.setObject(++index,objeto.getMoneda(), Types.CHAR);
                     ps.setObject(++index,objeto.getUsaDocumento(), Types.BOOLEAN);
                     ps.setObject(++index,updateD, Types.BOOLEAN);
-                    Array inArray =Objects.nonNull(aDestinoCompra)?cnx.createArrayOf(DestinoCompraUDT.TYPE_NAME,aDestinoCompra):null;
+                    Array inArray =Objects.nonNull(aDestinoCompra)?cnx.createArrayOf(String.format(DestinoCompraUDT.TYPE_NAME, schema),aDestinoCompra):null;
                     ps.setObject(++index,inArray, Types.ARRAY);
 
                     ResultSet rs = ps.executeQuery();
@@ -74,7 +74,7 @@ public class CuentaContableDAOImpl implements CuentaContableDAO{
             cnx.setSchema(schema);
             cnx.setAutoCommit(false);
             ObjectMapper mapper = new ObjectMapper();
-
+           //"char" <> character(n) or char(n)
             String sql = String.format("{ ? = call fn_at_json_iud_row_cuentacontablev2(?::character,?,?,?,?::character,?,?,?::%s.tp_at_destinocompra[]) }",schema);
             CallableStatement cstm =  cnx.prepareCall(sql);
             int index = 0;
@@ -86,7 +86,7 @@ public class CuentaContableDAOImpl implements CuentaContableDAO{
             cstm.setObject(++index,objeto.getMoneda(), Types.CHAR);
             cstm.setObject(++index,objeto.getUsaDocumento(), Types.BOOLEAN);
             cstm.setObject(++index,updateD, Types.BOOLEAN);
-            Array inArray =Objects.nonNull(aDestinoCompra)?cnx.createArrayOf(DestinoCompraUDT.TYPE_NAME,aDestinoCompra):null;
+            Array inArray =Objects.nonNull(aDestinoCompra)?cnx.createArrayOf(String.format(DestinoCompraUDT.TYPE_NAME, schema),aDestinoCompra):null;
             cstm.setObject(++index,inArray, Types.ARRAY);
 
             cstm.execute();
