@@ -43,6 +43,7 @@ public class CuentaContableController {
     public ResponseEntity<?> listar() {
         return ResponseEntity.ok(service.findAll());
     }*/
+    //Con anotacion @io.swagger.v3.oas
     @Operation(summary = "Devuelve la cuenta contable a partir de un identificador ")
     @ApiResponses(
         value = {
@@ -62,6 +63,8 @@ public class CuentaContableController {
             return ResponseEntity.ok(oCuentaContable);
         else return ResponseEntity.notFound().build();
     }
+    
+    //Con anotacion @io.swagger.v3.oas
     @Operation(summary = "Listar todos los registros de la cuenta contable a partir de un numero.", operationId = "GET_LISTAR_1", 
             description = "- Se lista con el filtro parte del número inicial y se ordenar ascendentemente.")
     @ApiResponses(
@@ -83,13 +86,18 @@ public class CuentaContableController {
             return ResponseEntity.ok(lista);
         else return ResponseEntity.notFound().build();
     }
-    @Operation(summary = "Listar todos los registros de la cuenta contable a partir de un numero (filtro tipo 1).", operationId = "GET_LISTAR_1", 
-            description = "- Se lista con el filtro parte del número inicial y se ordenar ascendentemente. \n - Primera tipo de filtro")
+    //io.swagger
+    @ApiOperation(value = "Listar todos los registros de la cuenta contable a partir de un numero (filtro tipo 1).",  
+                   notes = "- Se lista con el filtro parte del número inicial y se ordenar ascendentemente. \n - Primera tipo de filtro")
+    @io.swagger.annotations.ApiResponse(code = 200,response = CuentaContableDTO.class, responseContainer = "List", message = "Se encuentra registros")
     @GetMapping(value="/filtro-numero/1/{numero}", produces = MediaType.APPLICATION_JSON_VALUE)
-    @ResponseStatus(HttpStatus.OK)
-    public List<CuentaContableDTO> busquedaPersonalizadaNumero(@PathVariable String numero) {
-        System.out.println("Filtro 1");                
-        return service.busquedaPersonalizadaNumero(numero);
+     public ResponseEntity<List<CuentaContableDTO>> busquedaPersonalizadaNumero(@PathVariable String numero) {
+        System.out.println("Filtro 1");  
+        var lista = service.busquedaPersonalizadaNumero(numero);
+        if(Objects.nonNull(lista) && lista.size()>0)
+            return new ResponseEntity<>(lista,HttpStatus.OK);
+        else //return ResponseEntity.notFound().build(); 
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
     /*public ResponseEntity<?> busquedaPersonalizadaNumero(@PathVariable String numero) {
         System.out.println("Filtro 1");        

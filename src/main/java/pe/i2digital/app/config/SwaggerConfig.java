@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package pe.i2digital.config;
+package pe.i2digital.app.config;
 
 import java.util.ArrayList;
 import java.util.Set;
@@ -12,6 +12,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.http.MediaType;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
+import springfox.documentation.oas.annotations.EnableOpenApi;
 import springfox.documentation.service.ApiInfo;
 import springfox.documentation.service.Contact;
 import springfox.documentation.spi.DocumentationType;
@@ -20,13 +21,14 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 
 @Configuration
-@EnableSwagger2
+//@EnableSwagger2
+@EnableOpenApi
 public class SwaggerConfig {
     @Bean
     public Docket apiV1(){
         return new Docket(DocumentationType.OAS_30)
                 .groupName("appat-api-1.0")
-                .apiInfo(getApiV1Info())
+                //.apiInfo(getApiV1Info())
                 .produces(Set.of(MediaType.APPLICATION_JSON_VALUE))
                 //.consumes(Set.of(MediaType.APPLICATION_JSON_VALUE))
                 .select()
