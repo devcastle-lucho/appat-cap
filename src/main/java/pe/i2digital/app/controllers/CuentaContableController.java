@@ -26,7 +26,7 @@ import pe.i2digital.app.models.request.CuentaContableRequest;
 import pe.i2digital.app.services.CuentaContableService;
 
 @Api(tags = "API - Cuenta contable",value = "API CUENTA CONTABLE", description = "Se encarga de procesos/mantenimiento de la tabla maestra cuenta contable")
-@RequestMapping("/cuentacontable")
+@RequestMapping("/api/v1/cuentacontable")
 @RestController(value="cuentacontable")
 public class CuentaContableController {
     @Autowired

@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 import pe.i2digital.app.services.EstacionTrabajoService;
 import pe.i2digital.app.services.SucursalService;
 
-@RequestMapping("/estaciontrabajo")
+@RequestMapping("/api/v1/estaciontrabajo")
 @RestController(value="estaciontrabajo")
 public class EstacionTrabajoController {
     @Autowired

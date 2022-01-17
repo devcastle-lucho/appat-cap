@@ -9,7 +9,7 @@ import pe.i2digital.app.services.CentroCostosService;
 
 import java.util.Objects;
 
-@RequestMapping("/centrocostos")
+@RequestMapping("/api/v1/centrocostos")
 @RestController(value="centrocostos")
 public class CentroCostosController {
     @Autowired

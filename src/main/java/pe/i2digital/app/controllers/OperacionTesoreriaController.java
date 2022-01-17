@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import pe.i2digital.app.services.OperacionTesoreriaService;
 
-@RequestMapping("/operaciontesoreria")
+@RequestMapping("/api/v1/operaciontesoreria")
 @RestController(value="operaciontesoreria")
 public class OperacionTesoreriaController {
     @Autowired

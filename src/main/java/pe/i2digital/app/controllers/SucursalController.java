@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 import pe.i2digital.app.services.OperacionTesoreriaService;
 import pe.i2digital.app.services.SucursalService;
 
-@RequestMapping("/sucursal")
+@RequestMapping("/api/v1/sucursal")
 @RestController(value="sucursal")
 public class SucursalController {
     @Autowired
