@@ -13,6 +13,9 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import java.util.List;
 import java.util.Objects;
+import lombok.extern.java.Log;
+import lombok.extern.log4j.Log4j2;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -28,6 +31,10 @@ import pe.i2digital.app.services.CuentaContableService;
 @Api(tags = "API - Cuenta contable",value = "API CUENTA CONTABLE", description = "Se encarga de procesos/mantenimiento de la tabla maestra cuenta contable")
 @RequestMapping("/api/v1/cuentacontable")
 @RestController(value="cuentacontable")
+//logstash
+@Slf4j
+//@Log - JUL
+//@Log4j2
 public class CuentaContableController {
     @Autowired
     private CuentaContableService service;
@@ -36,6 +43,7 @@ public class CuentaContableController {
     @RequestMapping(value = "/",method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.OK)
     public List<CuentaContable> listar() {
+        log.info("Listando");
         return (List<CuentaContable>) service.findAll();
     }
     /*
@@ -92,7 +100,7 @@ public class CuentaContableController {
     @io.swagger.annotations.ApiResponse(code = 200,response = CuentaContableDTO.class, responseContainer = "List", message = "Se encuentra registros")
     @GetMapping(value="/filtro-numero/1/{numero}", produces = MediaType.APPLICATION_JSON_VALUE)
      public ResponseEntity<List<CuentaContableDTO>> busquedaPersonalizadaNumero(@PathVariable String numero) {
-        System.out.println("Filtro 1");  
+        //System.out.println("Filtro 1");  
         var lista = service.busquedaPersonalizadaNumero(numero);
         if(Objects.nonNull(lista) && lista.size()>0)
             return new ResponseEntity<>(lista,HttpStatus.OK);
@@ -124,14 +132,18 @@ public class CuentaContableController {
         description = "- I: Para insertar. \n- U: Para actualizar \n - D: Eliminar")
     @PutMapping(value="/{ruc}/iud/{accion}", produces = MediaType.TEXT_PLAIN_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.OK)
-    public String iudJson(
+    public ResponseEntity<String> iudJson(
             @Parameter(description = "RUC de la empresa de usuario que se ha logueado")
             @PathVariable String ruc, 
             @ApiParam(value = "Tipo de accion a realizar", defaultValue = "00",example = "I",allowableValues = "I,U,D") 
             @PathVariable String accion,
             @RequestBody CuentaContableRequest request) throws Exception {
-        //System.out.println(request.getOCuentaContable());
-        System.out.println("objeto: "+ new ObjectMapper().writeValueAsString(request.getOCuentaContable()));
-        return service.iudJson(ruc,accion,request);
+        try {
+            log.info("objeto: "+ new ObjectMapper().writeValueAsString(request.getOCuentaContable()));
+            return ResponseEntity.ok(service.iudJson(ruc,accion,request));        
+        } catch (Exception e) {
+            log.error("[CUENTA CONTABLE]", e);
+            return ResponseEntity.internalServerError().build();
+        }                        
     }
 }

@@ -6,8 +6,10 @@ import pe.i2digital.app.models.entity.CentroCostos;
 import pe.i2digital.app.models.repository.CentroCostosRepository;
 
 import java.util.List;
+import lombok.extern.slf4j.Slf4j;
 
 @Service
+@Slf4j
 public class CentroCostosServiceImpl implements CentroCostosService {
     @Autowired
     private CentroCostosRepository repository;
@@ -29,11 +31,18 @@ public class CentroCostosServiceImpl implements CentroCostosService {
 
     @Override
     public Iterable<CentroCostos> findAll() {
+        log.info("Listando centro costos..");//Pruebas
         return repository.findAll();
     }
 
     @Override
     public CentroCostos save(CentroCostos entity) {
+        //Proceso 1
+        log.info("Procesando..");
+        //Proceso 2
+        //log.info("Procesando 2..");
+        //Proceso 3
+        //log.info("Procesando 2..");
         return repository.save(entity);
     }
 
