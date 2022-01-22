@@ -14,7 +14,8 @@ import org.springframework.validation.FieldError;
 public class HTTPUtils {
     public static ResponseEntity<?> validar(BindingResult result) {
         Map<String,Object> errores = new HashMap<>();
-        result.getFieldErrors().forEach(fe -> errores.put(fe.getField(), "El campo '"+fe.getField()+"': "+fe.getDefaultMessage()));
+        result.getFieldErrors().forEach(fe -> errores.put(fe.getField(),
+                "El campo '"+fe.getField()+"': "+fe.getDefaultMessage()));
         return ResponseEntity.badRequest().body(errores);
     }
 }

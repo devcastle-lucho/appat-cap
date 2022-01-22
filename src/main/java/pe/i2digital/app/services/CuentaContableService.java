@@ -1,5 +1,6 @@
 package pe.i2digital.app.services;
 
+import java.io.IOException;
 import pe.i2digital.app.models.dto.CuentaContableDTO;
 import pe.i2digital.app.models.dto.projection.CuentaContableCustom;
 import pe.i2digital.app.models.dto.projection.CuentaContableVista;
