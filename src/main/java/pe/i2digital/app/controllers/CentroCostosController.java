@@ -8,7 +8,10 @@ import pe.i2digital.app.models.entity.CentroCostos;
 import pe.i2digital.app.services.CentroCostosService;
 import java.util.logging.*;
 import java.util.Objects;
+import javax.validation.Valid;
 import lombok.extern.java.Log;
+import org.springframework.validation.BindingResult;
+import pe.i2digital.app.utils.HTTPUtils;
 
 @RequestMapping("/api/v1/centrocostos")
 @RestController(value="centrocostos")
@@ -36,12 +39,20 @@ public class CentroCostosController {
         }                
     }
     @PostMapping
-    public ResponseEntity<?> crear(@RequestBody CentroCostos o) {
+    public ResponseEntity<?> crear(@Valid @RequestBody CentroCostos o, BindingResult result) {
+        if(result.hasErrors()) {
+            var r = HTTPUtils.validar(result);
+            log.log(Level.WARNING, r.getBody().toString());
+            return r;
+        }
+            
         var oDB =service.save(o);
         return ResponseEntity.status(HttpStatus.CREATED).body(oDB);
     }
     @PutMapping("/{id}")
-    public ResponseEntity<?> editar(@RequestBody CentroCostos o,@PathVariable Integer id) {
+    public ResponseEntity<?> editar(@Valid @RequestBody CentroCostos o, BindingResult result, @PathVariable Integer id) {
+        if(result.hasErrors()) 
+            return HTTPUtils.validar(result);
         var oDB = service.findById(id);
         if(Objects.isNull(o)) 
             return ResponseEntity.notFound().build();
