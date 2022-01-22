@@ -54,4 +54,5 @@ public class CentroCostosController {
         service.deleteById(id);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
+    
 }

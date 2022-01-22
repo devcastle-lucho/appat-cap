@@ -37,12 +37,12 @@ public class CentroCostos implements Serializable {
     @Column(name = "tb_centrocostos_id")
     private Integer id;
     @Size(max = 2)
-    @NotNull(message = "Código es obligatorio")
+    @NotNull(message = "Es obligatorio")
     @Column(name = "tb_centrocostos_cod", unique = true)
     private String codigo;
     
     @Size(max = 50)
-    @NotNull(message = "Nombre es obligatorio")
+    @NotNull(message = "Es obligatorio")
     @Column(name = "tb_centrocostos_nom", unique = true)
     private String nombre;
 }
