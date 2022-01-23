@@ -40,19 +40,20 @@ public class CentroCostosController {
         }                
     }
     @PostMapping
-    public ResponseEntity<?> crear(@Valid @RequestBody CentroCostos o, BindingResult result) {
-        if(result.hasErrors()) {
+    public ResponseEntity<?> crear(@Valid @RequestBody CentroCostos o/*, BindingResult result*/
+    ) {
+        /*if(result.hasErrors()) {
             var r = HTTPUtils.validar(result);
             log.log(Level.WARNING, r.getBody().toString());
             return r;
-        }
+        }*/
             
         var oDB =service.save(o);
         return ResponseEntity.status(HttpStatus.CREATED).body(oDB);
     }
     @PutMapping("/{id}")
-    public ResponseEntity<?> editar(@Valid @RequestBody CentroCostos o, BindingResult result, @PathVariable Integer id) {
-        if(result.hasErrors()) 
+    public ResponseEntity<?> editar(@Valid @RequestBody CentroCostos o, BindingResult result, @PathVariable Integer id) { //No centralizado: BindingResult
+        if(result.hasErrors()) //Mapeo de errores dentro de peticion API
             return HTTPUtils.validar(result);
         var oDB = service.findById(id);
         if(Objects.isNull(o)) 
