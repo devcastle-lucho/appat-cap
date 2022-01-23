@@ -9,6 +9,7 @@ public interface CentroCostosService {
     //CRUD: CREATE-READ-UPDATE-DELETE
     public CentroCostos findByCodigo(String codigo);
     public CentroCostos findById(Integer id);
+    public Optional<CentroCostos> findOptionalById(Integer id);
     public Iterable<CentroCostos> findAll();
     public List<CentroCostos> findByNombre(String nombre);
     public CentroCostos save(CentroCostos entity);

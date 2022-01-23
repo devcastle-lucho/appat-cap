@@ -11,6 +11,7 @@ import java.util.Objects;
 import javax.validation.Valid;
 import lombok.extern.java.Log;
 import org.springframework.validation.BindingResult;
+import pe.i2digital.app.exception.EntityNotFoundException;
 import pe.i2digital.app.utils.HTTPUtils;
 
 @RequestMapping("/api/v1/centrocostos")
@@ -25,19 +26,28 @@ public class CentroCostosController {
     //Leer: GET -> Tener en cuenta RMM: Modelo Richardson
     @GetMapping("/")
     public ResponseEntity<?> listar() {
+        if(true) {
+          //  throw new Exception("Error de logica");
+          var a=1/0;
+        }
+        
         //var a=1/0; ArithmeticException
         logger.log(Level.INFO, "Antes de llamar al servicio");
         return ResponseEntity.ok(service.findAll());//Respuesta 200
     }
     @GetMapping("/{id}")
-    public ResponseEntity<?> devolver(@PathVariable Integer id) {        
-        var objeto = service.findById(id);
+    public ResponseEntity<?> devolver(@PathVariable Integer id){   
+        var o = service.findOptionalById(id).orElseThrow(()-> 
+                new EntityNotFoundException(CentroCostos.class,"id",id.toString()));
+        return ResponseEntity.ok(o);
+        /*var objeto = service.findById(id);
         if(Objects.nonNull(objeto))
             return ResponseEntity.ok(objeto);//Respuesta 200
         else {
             log.log(Level.WARNING, "No se encuentra centro costos - ID={0}", id);
             return ResponseEntity.notFound().build();
-        }                
+        }     
+        */
     }
     @PostMapping
     public ResponseEntity<?> crear(@Valid @RequestBody CentroCostos o/*, BindingResult result*/

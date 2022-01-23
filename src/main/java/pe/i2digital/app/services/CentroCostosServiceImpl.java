@@ -6,6 +6,7 @@ import pe.i2digital.app.models.entity.CentroCostos;
 import pe.i2digital.app.models.repository.CentroCostosRepository;
 
 import java.util.List;
+import java.util.Optional;
 import lombok.extern.slf4j.Slf4j;
 
 @Service
@@ -49,5 +50,10 @@ public class CentroCostosServiceImpl implements CentroCostosService {
     @Override
     public void deleteById(Integer id) {
         repository.deleteById(id);
+    }
+
+    @Override
+    public Optional<CentroCostos> findOptionalById(Integer id) {
+        return repository.findById(id);
     }
 }
