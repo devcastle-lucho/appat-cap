@@ -1,0 +1,5 @@
+spring
+    datasource
+        url=jdbc:pgsql://127.0.0.1:5432/db_empresa
+        username=postgres
+        password=postgres

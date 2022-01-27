@@ -26,10 +26,10 @@ public class CentroCostosController {
     //Leer: GET -> Tener en cuenta RMM: Modelo Richardson
     @GetMapping("/")
     public ResponseEntity<?> listar() {
-        if(true) {
+        /*if(true) {
           //  throw new Exception("Error de logica");
           var a=1/0;
-        }
+        }*/
         
         //var a=1/0; ArithmeticException
         logger.log(Level.INFO, "Antes de llamar al servicio");
