@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "80376751-6efe-41d3-a3ca-3218f9c64706",
+		"_postman_id": "53a0063b-3fae-4001-995a-fc3e3caed795",
 		"name": "Capacitacion I2 Digital",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -11,16 +11,21 @@
 				{
 					"name": "Centro costos: Listar",
 					"request": {
+						"auth": {
+							"type": "noauth"
+						},
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/centrocostos/",
+							"raw": "http://localhost:8085/api/v1/centrocostos/",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "8080",
+							"port": "8085",
 							"path": [
+								"api",
+								"v1",
 								"centrocostos",
 								""
 							]
@@ -34,15 +39,17 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/centrocostos/3",
+							"raw": "http://localhost:8085/api/v1/centrocostos/10000",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "8080",
+							"port": "8085",
 							"path": [
+								"api",
+								"v1",
 								"centrocostos",
-								"3"
+								"10000"
 							]
 						}
 					},
@@ -79,7 +86,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "    {\r\n        \"codigo\": \"06\",\r\n        \"nombre\": \"PRUEBA CC\"\r\n    }",
+							"raw": "{\r\n    \"codigo\": \"06\"\r\n}\r\n  /*{\r\n        \"codigo\": \"06\",\r\n        \"nombre\": \"PRUEBA CC\"\r\n    }*/",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -87,13 +94,15 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/centrocostos/",
+							"raw": "http://localhost:8085/api/v1/centrocostos/",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "8080",
+							"port": "8085",
 							"path": [
+								"api",
+								"v1",
 								"centrocostos",
 								""
 							]
@@ -116,15 +125,17 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/centrocostos/16",
+							"raw": "http://localhost:8085/api/v1/centrocostos/1",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "8080",
+							"port": "8085",
 							"path": [
+								"api",
+								"v1",
 								"centrocostos",
-								"16"
+								"1"
 							]
 						}
 					},
@@ -221,16 +232,21 @@
 				{
 					"name": "Sucursal: Listar",
 					"request": {
+						"auth": {
+							"type": "noauth"
+						},
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/sucursal/",
+							"raw": "http://localhost:8085/api/v1/sucursal/",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "8080",
+							"port": "8085",
 							"path": [
+								"api",
+								"v1",
 								"sucursal",
 								""
 							]
@@ -263,7 +279,9 @@
 					"request": {
 						"method": "GET",
 						"header": [],
-						"url": null
+						"url": {
+							"raw": ""
+						}
 					},
 					"response": []
 				},
@@ -344,7 +362,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"oCuentaContable\": {\r\n        \"numero\":\"60341\",\r\n        \"nombre\":\"COMBUSTIBLE\"\r\n    }\r\n}",
+							"raw": "{\r\n    \"ocuentaContable\": {\r\n        \"numero\":\"60341\",\r\n        \"nombre\":\"COMBUSTIBLE\"\r\n    }\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -365,6 +383,123 @@
 								"20441636831",
 								"iud",
 								"I"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Test handleHttpRequestMethodNotSupported",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8085/api/v1/centrocostos/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8085",
+							"path": [
+								"api",
+								"v1",
+								"centrocostos",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Test handleMissingServletRequestParameter",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8085/api/v1/estaciontrabajo/filtro?codigo=01",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8085",
+							"path": [
+								"api",
+								"v1",
+								"estaciontrabajo",
+								"filtro"
+							],
+							"query": [
+								{
+									"key": "codigo",
+									"value": "01"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Error Handling Custom: MethodArgumentTypeMismatchException",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8085/api/v1/centrocostos/a",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8085",
+							"path": [
+								"api",
+								"v1",
+								"centrocostos",
+								"a"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Listar usuarios",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8085/api/v1/usuario/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8085",
+							"path": [
+								"api",
+								"v1",
+								"usuario",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Usuario: Devolver ",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8085/api/v1/usuario/codigo/000001",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8085",
+							"path": [
+								"api",
+								"v1",
+								"usuario",
+								"codigo",
+								"000001"
 							]
 						}
 					},
