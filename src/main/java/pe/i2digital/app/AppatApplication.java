@@ -16,6 +16,7 @@ import pe.i2digital.app.models.repository.CuentaContableRepository;
 import pe.i2digital.app.models.udt.DestinoCompraUDT;
 import pe.i2digital.app.services.CentroCostosService;
 import pe.i2digital.app.services.EstacionTrabajoService;
+import pe.i2digital.app.utils.EncryptDecryptUtil;
 
 @SpringBootApplication
 public class AppatApplication implements CommandLineRunner
@@ -45,7 +46,11 @@ public class AppatApplication implements CommandLineRunner
 
     @Override
     public void run(String... args) throws Exception {
-        //testUDTArray();
+       // testEncryptDescrypt();
+    }
+    private void testEncryptDescrypt() throws Exception {
+        String email = EncryptDecryptUtil.decryptPhrase("MX4FoUivuQ2o2a8DGJZ3Bg==");
+        //System.out.println("Email: "+email);
     }
     private void testUDTArray() throws Exception {
         String respuesta = null;
