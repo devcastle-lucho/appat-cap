@@ -16,12 +16,11 @@ public class SucursalController {
     @Autowired
     private SucursalService service;
     @GetMapping("/")
-    @PreAuthorize("hasRole('GESTOR ADMINISTRADOR')")
+    @PreAuthorize("hasRole('ROLE_GESTOR ADMINISTRADOR')")
     public ResponseEntity<?> listar() {
         return ResponseEntity.ok(service.findAll());
     }
     @GetMapping("/{id}")
-
     public ResponseEntity<?> devolver(@PathVariable Integer id) {
         return ResponseEntity.ok(service.findById(id));
     }

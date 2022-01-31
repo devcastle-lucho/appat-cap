@@ -39,7 +39,7 @@ public class JwtUserDetailsServiceImpl implements UserDetailsService{
         String passwordDecrypt = EncryptDecryptUtil.decryptPhrase(usuario.getPassword());
         log.warn("Password: "+passwordDecrypt);
         String perfil = usuario.getPerfil().getNombre();
-        List<GrantedAuthority> autorizaciones = Arrays.asList(new SimpleGrantedAuthority(perfil));
+        List<GrantedAuthority> autorizaciones = Arrays.asList(new SimpleGrantedAuthority("ROLE_"+perfil));
         log.warn("Perfil: "+perfil);
         return new User(usuario.getNickname(), new BCryptPasswordEncoder().encode(passwordDecrypt), autorizaciones);
     }
