@@ -55,7 +55,7 @@ public class Usuario implements Serializable {
     @Column(name = "tb_usuario_tip")
     private String tipo;
     @JsonIgnoreProperties(value = {"tb_usuario_id", "handler", "hibernateLazyInitializer"})
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "tb_perfil_id")
     private Perfil perfil;    
 }

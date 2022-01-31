@@ -2,6 +2,7 @@ package pe.i2digital.app.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,10 +16,12 @@ public class SucursalController {
     @Autowired
     private SucursalService service;
     @GetMapping("/")
+    @PreAuthorize("hasRole('GESTOR ADMINISTRADOR')")
     public ResponseEntity<?> listar() {
         return ResponseEntity.ok(service.findAll());
     }
     @GetMapping("/{id}")
+
     public ResponseEntity<?> devolver(@PathVariable Integer id) {
         return ResponseEntity.ok(service.findById(id));
     }

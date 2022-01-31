@@ -10,5 +10,6 @@ package pe.i2digital.app.utils;
  * @author Luis
  */
 public class Constants {
-   public static final String DB_SCHEMA ="sh_empresa_%s"; 
+   public static final String DB_SCHEMA ="sh_empresa_%s";
+   public static final long JWT_TOKEN_VALIDITY = 1 * 60 * 60;
 }

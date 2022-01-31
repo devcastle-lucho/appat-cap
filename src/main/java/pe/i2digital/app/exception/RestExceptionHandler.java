@@ -12,6 +12,7 @@ import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.web.HttpMediaTypeNotSupportedException;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -23,6 +24,7 @@ import org.springframework.web.method.annotation.MethodArgumentTypeMismatchExcep
 import org.springframework.web.multipart.support.MissingServletRequestPartException;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 import pe.i2digital.app.exception.domain.ApiError;
+import pe.i2digital.app.exception.domain.AuthAppException;
 
 //Error Handling 
 @Order(Ordered.HIGHEST_PRECEDENCE)
@@ -102,14 +104,33 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler{
         apiError.setDebugMessage(ex.getMessage());
         return buildResponseEntity(apiError);
     }
-     @ExceptionHandler(RuntimeException.class)
+    @ExceptionHandler(RuntimeException.class)
     public ResponseEntity<Object> handleRuntimeException(RuntimeException ex) {
         log.error("ERROR SERVIDOR :", ex);
         ApiError apiError = new ApiError(HttpStatus.INTERNAL_SERVER_ERROR);
         apiError.setMessage("Excepcion en ejecución");
         apiError.setDebugMessage(ex.getMessage());
         return buildResponseEntity(apiError);
-    }   
+    }
+    //org.springframework.security.access.AccessDeniedException
+    //Manejo de excepcion de acceso denegado - 403
+    @ExceptionHandler(AccessDeniedException.class)
+    protected ResponseEntity<Object> handleAccessDeniedException(
+            AccessDeniedException ex,WebRequest request){
+        ApiError apiError= new ApiError(HttpStatus.FORBIDDEN);
+        apiError.setMessage("Acceso denegado");
+        apiError.setDebugMessage(ex.getLocalizedMessage());
+        return buildResponseEntity(apiError);
+    }
+
+    @ExceptionHandler(AuthAppException.class)
+    protected ResponseEntity<Object> handleAuthAppException(Exception ex) {
+        //log.error("ERROR :", ex);
+        ApiError apiError = new ApiError(HttpStatus.UNAUTHORIZED);
+        apiError.setMessage("No autenticado");
+        apiError.setDebugMessage(ex.getMessage());
+        return buildResponseEntity(apiError);
+    }
     private ResponseEntity<Object> buildResponseEntity(ApiError apiError) {
         return new ResponseEntity<>(apiError, apiError.getStatus());
     }
