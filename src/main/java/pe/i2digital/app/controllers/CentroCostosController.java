@@ -25,7 +25,7 @@ public class CentroCostosController {
 
     //Leer: GET -> Tener en cuenta RMM: Modelo Richardson
     @GetMapping("/")
-    public ResponseEntity<?> listar() {
+    public ResponseEntity<?> listar() throws Exception {
         /*if(true) {
           //  throw new Exception("Error de logica");
           var a=1/0;
@@ -33,6 +33,7 @@ public class CentroCostosController {
         
         //var a=1/0; ArithmeticException
         logger.log(Level.INFO, "Antes de llamar al servicio");
+        //Thread.sleep(4000);
         return ResponseEntity.ok(service.findAll());//Respuesta 200
     }
     @GetMapping("/{id}")
